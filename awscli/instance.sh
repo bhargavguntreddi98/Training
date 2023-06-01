@@ -1,5 +1,5 @@
 #!/bin/bash
-DISPLAYNAME="neptune"
+DISPLAYNAME="pluto"
 DESCRIPTION="allow SSH and Port"
 VPC="vpc-048defb2ebe5cd35e"
 AMI="ami-053b0d53c279acc90"
