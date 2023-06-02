@@ -9,10 +9,22 @@ SUBNET="subnet-0503d32d339bd0716"
 MYIP="`curl https://checkip.amazonaws.com`"
 PORT1="22"
 PORT2="80"
-echo 
-echo "Creating keypair and storing private key to $DISPLAYNAME.pem file"
-aws ec2 create-key-pair --key-name "$DISPLAYNAME" --query "KeyMaterial" --output text > $DISPLAYNAME.pem
-tail -2 $DISPLAYNAME.pem
+KEY="pluto"
+echo
+aws ec2 describe-key-pairs --key-name $KEY &>> /dev/null
+
+if [ $? -eq 0 ]
+
+then
+
+echo "keypair exists"
+
+else
+
+echo " Creating New Keypair with name : $KEY"
+aws ec2 create-key-pair --key-name "$KEY" --query "KeyMaterial" --output text > $KEY.pem
+fi
+tail -2 $KEY.pem
 sleep 2
 echo
 echo "Creating security group and storing in a variable"
